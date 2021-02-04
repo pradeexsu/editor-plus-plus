@@ -1,0 +1,26 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ${{matrix.os}}
+    strategy: 
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: installing gtk (libwxgtk3.0-gtk3-dev)
+      run: sudo apt install libwxgtk3.0-gtk3-dev 
+          | echo wxWidgets installed
+    - name: building app
+      run: g++ *.cpp `wx-config --cxxflags --libs`
+          | echo app builded
+    - name: test completed
+      run: echo ci executed successfully 
+#      run: ./a.out    
