@@ -1,13 +1,14 @@
 language: cpp
 sudo: required
 script:
-  - sudo unlink /usr/bin/gcc && sudo ln -s /usr/bin/gcc-5 /usr/bin/gcc
-  - sudo unlink /usr/bin/g++ && sudo ln -s /usr/bin/g++-5 /usr/bin/g++
-  - sudo apt install libwxgtk3.0-gtk3-dev
+  - sudo apt install g++
+  - sudo apt install libwxgtk3.0-gtk3-dev 
   - gcc --version
   - g++ *.cpp `wx-config --cxxflags --libs`
-
 addons:
   apt:
     sources:
-    - ubuntu-latest
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-5
+    - g++-5
